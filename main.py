@@ -1,5 +1,6 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, Header
 import jwt
+from typing import Optional
 from config import read_conf
 import os
 from file_managment import FileManagement
@@ -18,8 +19,9 @@ def get_list():
 
 
 @app.post("/list/file")
-def upload_file():
-    pass
+async def upload_file(path: Optional[str] = Header(None),token: Optional[str] = Header(None),file: UploadFile = File(default="")):
+
+    return {"name": file.filename, "token": token, "path": path}
 
 
 @app.delete("/list/file")

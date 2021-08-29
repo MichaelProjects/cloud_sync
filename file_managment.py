@@ -9,8 +9,8 @@ class FileManagement:
 
     # basic file operations
     
-    def insert_file(self):
-        pass
+    def insert_file(self, name, path, data):
+        
 
     def delete_file(self):
         pass
@@ -24,10 +24,9 @@ class FileManagement:
     # advanced file operations
 
     def get_all_files_dirs(self):
-        dir = []
-        files = []
+        result = []
         for (dir_path, dir_name, filename) in os.walk(self.storage_path):
-            dir.append(dir_path)
-            files.append(filename)
-        return {"dirs": dir, "files": files}
+            data = {"dir": dir_path.split(self.storage_path)[1], "files": filename, "subdir": dir_name}
+            result.append(data)
+        return {"cloud_sync":result}
         
